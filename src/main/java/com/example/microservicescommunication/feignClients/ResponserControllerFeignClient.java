@@ -1,19 +1,15 @@
 package com.example.microservicescommunication.feignClients;
 
-
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/feignClient")
+@RequestMapping("/feignClient/responser")
 public class ResponserControllerFeignClient {
 
-    @GetMapping("/response")
+    @GetMapping("/get-message")
     public String getMessage() {
-        return "Hello from ResponserController!";
-    }
-
-    @PostMapping("/echo")
-    public String echoMessage(@RequestBody String message) {
-        return "Echo from ResponserController: " + message;
+        return "Hello from FeignClient ResponserController!";
     }
 }

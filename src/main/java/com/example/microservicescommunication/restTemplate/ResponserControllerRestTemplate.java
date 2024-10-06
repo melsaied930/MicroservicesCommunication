@@ -4,11 +4,11 @@ package com.example.microservicescommunication.restTemplate;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/resttemplate")
+@RequestMapping("/template/responser")
 public class ResponserControllerRestTemplate {
 
-        @GetMapping("/response")
+    @GetMapping("/get-message")
     public String getMessage() {
-        return "Hello from ResponserController!";
+        return "Hello from RestTemplate ResponserController!";
     }
 }
