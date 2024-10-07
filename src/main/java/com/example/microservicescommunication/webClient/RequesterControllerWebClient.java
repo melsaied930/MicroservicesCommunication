@@ -1,7 +1,8 @@
 package com.example.microservicescommunication.webClient;
 
+import com.example.microservicescommunication.ClientBaseUrlConfig;
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,25 +12,19 @@ import org.springframework.web.reactive.function.client.WebClient;
 @RequestMapping("/webClient/requester")
 public class RequesterControllerWebClient {
 
-    @Value("${server.protocol:http}")
-    private String protocol;
-
-    @Value("${server.hostname:localhost}")
-    private String hostname;
-
-    @Value("${server.port:8080}")
-    private int port;
-
     private final WebClient.Builder webClientBuilder;
     private WebClient webClient;
+    private final ClientBaseUrlConfig clientBaseUrlConfig;
 
-    public RequesterControllerWebClient(WebClient.Builder webClientBuilder) {
+    @Autowired
+    public RequesterControllerWebClient(WebClient.Builder webClientBuilder, ClientBaseUrlConfig clientBaseUrlConfig) {
         this.webClientBuilder = webClientBuilder;
+        this.clientBaseUrlConfig = clientBaseUrlConfig;
     }
 
     @PostConstruct
     public void init() {
-        String baseUrl = protocol + "://" + hostname + ":" + port + "/webClient/responser";
+        String baseUrl = clientBaseUrlConfig.getBaseUrl("/responser");
         this.webClient = webClientBuilder.baseUrl(baseUrl).build();
     }
 
