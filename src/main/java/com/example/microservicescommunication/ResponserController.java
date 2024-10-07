@@ -16,11 +16,10 @@ public class ResponserController {
     @PostMapping("/get-message")
     public Map<String, String> getMessage(
             @RequestBody(required = false) String name,
-            @RequestHeader(value = "headerParam", required = false, defaultValue = "default-header") String headerParam,
+            @RequestHeader(value = "custom-header", required = false, defaultValue = "default-header") String headerParam, // Change "headerParam" to "custom-header"
             @RequestParam(value = "urlParam", required = false, defaultValue = "default-param") String urlParam
     ) {
-
-        if (name == null || name.isEmpty()) {
+        if (name == null || name.trim().isEmpty()) {
             name = "Guest";
         }
 
@@ -31,4 +30,5 @@ public class ResponserController {
 
         return response;
     }
+
 }
