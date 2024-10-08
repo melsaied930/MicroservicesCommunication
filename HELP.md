@@ -54,7 +54,6 @@ keytool -genkeypair -alias app-ssl-cert -keyalg RSA -keystore src/main/resources
    
 5. **Find where Java home directory is installed**:
     ```bash
-    /usr/libexec/java_home
     ```
 
 6. **Check if the Certificate was Successfully Imported**:
